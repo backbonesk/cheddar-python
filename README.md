@@ -2,7 +2,7 @@
 
 A Python wrapper for Cheddar's application interface. Cheddar is a payment gateway for processing and executing transactions within a neat and universal API.
 
-At the moment, the following payment methods and services are supported by Cheddar and this library:
+At the moment, the following payment methods and services are supported by the Cheddar service and this library:
 
 - CardPay with optional addition for ComfortPay service – Tatra banka, a.s.
 - TatraPay – Tatra banka, a.s.
@@ -103,7 +103,7 @@ Second argument to the function call is an associative array of configuration op
 |`payer_email`|string|✓|customer’s email (which has to be a valid e-mail address)|
 |`language`|string| |customer’s language|
 |`description`|string| |reference for the customer|
-|`reurn_url` or `callback`|string|✓|URL to return to after the payment<br>_iTerminal does not use this attribute since you have to set this up once for all transactions in their administration interface_|
+|`return_url` or `callback`|string|✓|URL to return to after the payment<br>_iTerminal does not use this attribute since you have to set this up once for all transactions in their administration interface_|
 |`notification_url`|string| |URL to send notifications to<br>_required for PayPal transactions_|
 |`cpp_logo_image`|string| |header image at PayPal<br>_applicable only to PayPal transactions_|
 |`cpp_cart_border_color`|string| |HEX code of colour at PayPal<br>_applicable only to PayPal transactions_|
@@ -208,7 +208,7 @@ The JSON-encoded body will look something like this:
 
 ### Updating planned transaction
 
-The next use case is the ability to change date and / or amount of a next planned periodical playment. The output of the call is summary of the planned payment including its UUID.
+The next use case is the ability to change date and / or amount of a next planned periodical payment. The output of the call is summary of the planned payment including its UUID.
 
 ```python
 import datetime
