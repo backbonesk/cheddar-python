@@ -44,11 +44,11 @@ class Payments(object):
 
         return Payment(response)
 
-    def refund(self, uuid):
+    def refund(self, uuid, refund):
         data = {"refund": refund}
 
         status_code, response = self.requestor.request(
-            "post", "/api/v1/payments/%s/refund" % (uuid), data
+            "post", "/api/v1/payments/%s/refund" % uuid, data
         )
 
         return Payment(response)
