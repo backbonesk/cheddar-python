@@ -4,11 +4,18 @@ from __future__ import absolute_import, division, print_function
 
 import json
 import hmac
+import sys
+
 import requests
 
 from hashlib import sha1
 from .errors import APIConnectionError, APIError
 from .utils import JSONEncoder
+
+if sys.version_info[0] < 3:
+    from urllib import urlencode
+else:
+    from urllib.parse import urlencode
 
 
 class Requestor:
@@ -16,15 +23,21 @@ class Requestor:
         self.client = client
         self.configuration = self.client.configuration
 
-    def request(self, method, endpoint_url, raw={}):
+    def request(self, method, endpoint_url, raw=None, query=None):
+        if not raw:
+            raw = {}
+
         data = json.dumps(raw, cls=JSONEncoder)
         headers = {
             "User-Agent": self.client.identifier(),
             "Content-Type": "application/json",
             "X-Key": self.configuration.key,
-            "X-Signature": self.sign("%s;%s" % (endpoint_url, data)),
         }
 
+        if query:
+            headers["X-Signature"] = self.sign("%s;%s" % (endpoint_url + "?" + urlencode(query), data))
+        else:
+            headers["X-Signature"] = self.sign("%s;%s" % (endpoint_url, data))
         try:
             response = requests.request(
                 method=method,
@@ -32,6 +45,7 @@ class Requestor:
                 headers=headers,
                 data=data,
                 timeout=self.configuration.timeout,
+                params=query
             )
         except Exception as e:
             self._handle_request_error(e)

@@ -84,6 +84,7 @@ First argument is a service provider, which can currently be one of the followin
 |`cheddar.Service.SPOROPAY`|SporoPay, Slovenská sporiteľňa|
 |`cheddar.Service.TATRAPAY`|TatraPay, Tatra banka|
 |`cheddar.Service.CARDPAY`|Cardpay, Tatra banka|
+|`cheddar.Service.COMFORTPAY`|ComfortPay (periodic payments), Tatra banka|
 |`cheddar.Service.EPLATBY`|ePlatby, VÚB|
 |`cheddar.Service.ECARD`|eCard, VÚB|
 |`cheddar.Service.PAYPAL`|PayPal Payments Standard, PayPal|
