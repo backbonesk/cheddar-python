@@ -9,6 +9,7 @@ class Service(object):
     EPLATBY = "eplatby"
     TATRAPAY = "tatrapay"
     CARDPAY = "cardpay"
+    COMFORTPAY = "comfortpay"
     PAYPAL = "paypal"
     GPWEBPAY = "gpwebpay"
     ITERMINAL = "iterminal"

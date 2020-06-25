@@ -1,20 +1,28 @@
 # Changelog
 
+## v0.6.0: 25/06/2020
+
+Added missing keyword support for ComfortPay service.
+
 ## v0.5.0: 24/09/2019
 
 Renamed package to `cheddarpayments`, open sourced at GitHub and released to PyPI.
 
 ## v0.4.0: 06/09/2019
 
-Rearchitecting API to be a bit more Pythonic with Python 3.4+ compatibility. Code formatting is covered by Black and various small fixes to make everything better and easier including first test.
+Rearchitecting API to be a bit more Pythonic with Python 3.4+ compatibility. Code formatting is covered by Black and
+various small fixes to make everything better and easier including first test.
 
 ## v0.3.1: 24/08/2016
 
-Added the ability to set `X-Real-IP` header with user's 'IP address. The IP should be set as `ip_address` property on `cheddar` class.
+Added the ability to set `X-Real-IP` header with user's 'IP address. The IP should be set as `ip_address` property on
+`cheddar` class.
 
 ## v0.3.0: 08/05/2016
 
-Aded support for Poštová banka's iTerminal and a note in the documentation about changing the endpoint URL to either sandbox or completely different Cheddar instance. Production URL for the service has also changed to [cheddarpayments.com](https://www.cheddarpayments.com).
+Added support for Poštová banka's iTerminal and a note in the documentation about changing the endpoint URL to either
+sandbox or completely different Cheddar instance. Production URL for the service has also changed to
+[cheddarpayments.com](https://www.cheddarpayments.com).
 
 ## v0.2.4: 07/09/2015
 
