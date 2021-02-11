@@ -13,3 +13,4 @@ class Service(object):
     PAYPAL = "paypal"
     GPWEBPAY = "gpwebpay"
     ITERMINAL = "iterminal"
+    ITERMINAL2 = "iterminal2"

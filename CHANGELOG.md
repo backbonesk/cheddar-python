@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.6.1: 11/02/2021
+
+Added support for new (sia.eu) Poštová banka's iTerminal service sandbox and production environments
+(available as `PBIterminal2` driver / `ITERMINAL2` service).
+
 ## v0.6.0: 25/06/2020
 
 Added missing keyword support for ComfortPay service.

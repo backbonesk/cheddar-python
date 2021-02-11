@@ -1,6 +1,7 @@
 # Cheddar Bindings for Python
 
-A Python wrapper for Cheddar's application interface. Cheddar is a payment gateway for processing and executing transactions within a neat and universal API.
+A Python wrapper for Cheddar's application interface. Cheddar is a payment gateway for processing and executing
+transactions within a neat and universal API.
 
 At the moment, the following payment methods and services are supported by the Cheddar service and this library:
 
@@ -13,7 +14,8 @@ At the moment, the following payment methods and services are supported by the C
 - GP webpay – Global Payments Europe, s.r.o.
 - PayPal – PayPal (Europe) S.à r.l. et Cie, S.C.A.
 
-To see what is new or changed in the current version, check out the [changelog](https://github.com/backbonesk/cheddar-python/blob/master/CHANGELOG.md).
+To see what is new or changed in the current version, check out the
+[changelog](https://github.com/backbonesk/cheddar-python/blob/master/CHANGELOG.md).
 
 ## Setup
 
@@ -33,7 +35,8 @@ For the API client to work you would need Python 2.7+ or Python 3.4+.
 
 ## Usage
 
-First off, you need to require the library and provide authentication information by providing your user handle and shared secret you got from the provider.
+First off, you need to require the library and provide authentication information by providing your user handle and
+shared secret you got from the provider.
 
 ```python
 import cheddar
@@ -47,17 +50,23 @@ client = cheddar.Cheddar(
 )
 ```
 
-In case you'd like to use the sandbox mode use `cheddar.Environment.Sandbox` when creating configuration object. You can also create your own environment pointing to any valid URL with Cheddar instance running:
+In case you'd like to use the sandbox mode use `cheddar.Environment.Sandbox` when creating configuration object. You
+can also create your own environment pointing to any valid URL with Cheddar instance running:
 
     my_test_environment = cheddar.Environment("test", "https://my.cheddar.test")
 
-**Please note** that only VÚB eCard, iTerminal, GP webpay and PayPal currently allow for using their test environments so in case of other providers production URLs will be used! When using sandbox with supported bank or financial institution never use real world credit cards / accounts for testing payment methods implementation (they will not work). Always use virtual testing cards / accounts provided for this purpose by the payment institution.
+**Please note** that only VÚB eCard, iTerminal, GP webpay and PayPal currently allow for using their test environments
+so in case of other providers production URLs will be used! When using sandbox with supported bank or financial
+institution never use real world credit cards / accounts for testing payment methods implementation (they will not
+work). Always use virtual testing cards / accounts provided for this purpose by the payment institution.
 
 ### Creating a transaction
 
 It is quite simple to instantiate a payment.
 
-Here’s a quick piece of example code to get you started which will call the Cheddar service and retrieve UUID – universal identifier of the transaction and set the transaction status to `none` (see next section for more on transaction statuses).
+Here’s a quick piece of example code to get you started which will call the Cheddar service and retrieve UUID –
+universal identifier of the transaction and set the transaction status to `none` (see next section for more on
+transaction statuses).
 
 ```python
 payment = client.payments.create(
@@ -75,7 +84,8 @@ payment = client.payments.create(
 )
 ```
 
-When using the wrapper in web context, the user's IP is automatically added to the data array from the environment variables. If you wish to provide your own, add `payer_ip_address` key with valid address as a value.
+When using the wrapper in web context, the user's IP is automatically added to the data array from the environment
+variables. If you wish to provide your own, add `payer_ip_address` key with valid address as a value.
 
 First argument is a service provider, which can currently be one of the following:
 
@@ -89,9 +99,11 @@ First argument is a service provider, which can currently be one of the followin
 |`cheddar.Service.ECARD`|eCard, VÚB|
 |`cheddar.Service.PAYPAL`|PayPal Payments Standard, PayPal|
 |`cheddar.Service.GPWEBPAY`|GP webpay, Global Payments Europe|
-|`cheddar.Service.ITERMINAL`|iTerminal, Poštová banka|
+|`cheddar.Service.ITERMINAL`|iTerminal, Poštová banka (firstdata.lv backend)|
+|`cheddar.Service.ITERMINAL2`|iTerminal, Poštová banka (sia.eu backend)|
 
-Second argument to the function call is an associative array of configuration options. Which options have to be used and which have no effect at all depends on the service provider. The next table lists all possible attributes:
+Second argument to the function call is an associative array of configuration options. Which options have to be used
+and which have no effect at all depends on the service provider. The next table lists all possible attributes:
 
 | Attribute name | Data type | Required? | Notes |
 |:---------------|:---------:|:---------:|:------|
@@ -110,13 +122,21 @@ Second argument to the function call is an associative array of configuration op
 |`cpp_cart_border_color`|string| |HEX code of colour at PayPal<br>_applicable only to PayPal transactions_|
 |`periodicity`|integer| |periodicity in days, when the next periodical payment will be automatically executed; default value is 30 days<br>_applicable only to ComfortPay transactions_|
 
-Note that all of the supported currencies are available as a simple constant on `cheddar.Currency` class to make it easier in code.
+Note that all of the supported currencies are available as a simple constant on `cheddar.Currency` class to make it
+easier in code.
 
-After the call you can inspect the returning `Payment` object, which is described in the `Getting transaction details` part of this document.
+After the call you can inspect the returning `Payment` object, which is described in the `Getting transaction details`
+part of this document.
 
-To get to the URL of a payments gateway at the bank where the payment is processed just redirect the user to value of `payment.redirect_url` property.
+To get to the URL of a payments gateway at the bank where the payment is processed just redirect the user to value of
+`payment.redirect_url` property.
 
-After the payment process at the payment gateway is finished, you will be redirected to the URL you specified in `return_url` / `callback` parameter during the create call in the example above. The URL will have two more GET parameters added - `uuid`, for the payment identifier and `status`, for the current status of the payment transaction (for some payment methods this may change in time, and you will be notified about the change to the URL you specified in the `notification_url` parameter [see the `Asynchronous transaction notifications` part of this document for more info])
+After the payment process at the payment gateway is finished, you will be redirected to the URL you specified in
+`return_url` / `callback` parameter during the create call in the example above. The URL will have two more GET
+parameters added - `uuid`, for the payment identifier and `status`, for the current status of the payment transaction
+(for some payment methods this may change in time, and you will be notified about the change to the URL you specified
+in the `notification_url` parameter
+[see the `Asynchronous transaction notifications` part of this document for more info])
 
 
 #### Allowed transaction statuses
@@ -161,9 +181,12 @@ Afterwards you can inspect the returning object, which contains these properties
 
 ### Asynchronous transaction notifications
 
-Transactions may have a `notification_url` attribute (in case of PayPal and ComfortPay the attribute is mandatory), that will receive a ping on every change to a transaction (in case of PayPal or ComfortPay it is also the only way to find out the status of the payment).
+Transactions may have a `notification_url` attribute (in case of PayPal and ComfortPay the attribute is mandatory),
+that will receive a ping on every change to a transaction (in case of PayPal or ComfortPay it is also the only way to
+find out the status of the payment).
 
-Cheddar calls the value of `notification_url` attribute as POST request with GET attributes `uuid` and `signature` (which needs to be verified) and `application/json` body with full payment details as explained in the previous section.
+Cheddar calls the value of `notification_url` attribute as POST request with GET attributes `uuid` and `signature`
+(which needs to be verified) and `application/json` body with full payment details as explained in the previous section.
 
 To validate the signature, you need to call the following:
 
@@ -171,7 +194,8 @@ To validate the signature, you need to call the following:
 is_valid = client.messages.validate(uuid, signature);
 ```
 
-In case the signature is incorrect a `cheddar.errors.MessageIntegrityError` is thrown, otherwise the function returns `true`. After a successful validation you can trust the json-encoded body of the request.
+In case the signature is incorrect a `cheddar.errors.MessageIntegrityError` is thrown, otherwise the function returns
+`true`. After a successful validation you can trust the json-encoded body of the request.
 
 The JSON-encoded body will look something like this:
 
@@ -209,7 +233,8 @@ The JSON-encoded body will look something like this:
 
 ### Updating planned transaction
 
-The next use case is the ability to change date and / or amount of a next planned periodical payment. The output of the call is summary of the planned payment including its UUID.
+The next use case is the ability to change date and / or amount of a next planned periodical payment. The output of
+the call is summary of the planned payment including its UUID.
 
 ```python
 import datetime
@@ -220,13 +245,17 @@ payment = client.payments.update(uuid, [
 ]);
 ```
 
-However, also the status of the planned payment might be changed – from `none` to `cancelled` or the other way. Just make sure that the `charge_on` attribute is set to correct value or explicitly set it, when changing the status.
+However, also the status of the planned payment might be changed – from `none` to `cancelled` or the other way. Just
+make sure that the `charge_on` attribute is set to correct value or explicitly set it, when changing the status.
 
 ### Refunding transactions
 
-With Poštová banka’s iTerminal service you might once request a refund on executed transaction in part, or in full. In case of Tatra banka's CardPay service you might request as many refunds as you'd like until sum of all prior refunds reaches the amount of the original transaction.
+With Poštová banka’s iTerminal service you might once request a refund on executed transaction in part, or in full. In
+case of Tatra banka's CardPay service you might request as many refunds as you'd like until sum of all prior refunds
+reaches the amount of the original transaction.
 
-The `reason` is more informative and should be one of either `requested_by_customer`, `fraudelent`, `duplicate` or `unknown` (default). Currency has to be the same as when executing the original payment.
+The `reason` is more informative and should be one of either `requested_by_customer`, `fraudelent`, `duplicate` or
+`unknown` (default). Currency has to be the same as when executing the original payment.
 
 ```python
 payment = client.payments.refund(uuid, [
@@ -252,11 +281,12 @@ Run the linter with:
 
 	make lint
 
-The client library uses Black for code formatting. Code must be formatted with Black before PRs are submitted. Run the formatter with:
+The client library uses Black for code formatting. Code must be formatted with Black before PRs are submitted. Run the
+formatter with:
 
 	make fmt
 
 
 ---
 
-&copy; 2019 BACKBONE, s.r.o.
+&copy; 2021 BACKBONE, s.r.o.
