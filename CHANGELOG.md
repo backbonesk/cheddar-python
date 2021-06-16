@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.6.2 & v0.6.3: 16/06/2021
+
+Maintenance release – previous version have been yanked and tags removed due to a security issue and
+this is basically a rerelease of previous version with the problem fixed.
+
 ## v0.6.1: 11/02/2021
 
 Added support for new (sia.eu) Poštová banka's iTerminal service sandbox and production environments
