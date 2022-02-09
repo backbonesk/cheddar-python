@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.0 : 09/02/2022
+
+Transaction contains information about the service using `Transaction.Service` class.
+
 ## v0.6.2 & v0.6.3: 16/06/2021
 
 Maintenance release – previous version have been yanked and tags removed due to a security issue and

@@ -4,6 +4,13 @@ from __future__ import absolute_import, division, print_function
 
 
 class Transaction(object):
+
+    class Service:
+        def __init__(self, data):
+            self.name = data.get('name')
+            self.handle = data.get('handle')
+            self.provider = data.get('provider')
+
     def __init__(self, data):
         self.uuid = data['uuid']
         self.type = data['type']
@@ -16,6 +23,7 @@ class Transaction(object):
 
         self.amount = data['amount']
         self.currency = data["currency"]
+        self.service = self.Service(data['service']) if 'service' in data else None
 
         self.iban = data['iban'] if 'iban' in data else None
         self.notes = data['notes'] if 'notes' in data else None
