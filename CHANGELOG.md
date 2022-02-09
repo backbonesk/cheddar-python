@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.1 : 09/02/2022
+
+FIX: Do not pass `None` into `Transaction.Service` constructor
+
 ## v0.7.0 : 09/02/2022
 
 Transaction contains information about the service using `Transaction.Service` class.

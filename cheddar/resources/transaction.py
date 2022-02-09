@@ -23,7 +23,7 @@ class Transaction(object):
 
         self.amount = data['amount']
         self.currency = data["currency"]
-        self.service = self.Service(data['service']) if 'service' in data else None
+        self.service = self.Service(data['service']) if data.get('service') else None
 
         self.iban = data['iban'] if 'iban' in data else None
         self.notes = data['notes'] if 'notes' in data else None
